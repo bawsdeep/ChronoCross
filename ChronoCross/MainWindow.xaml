@@ -1,0 +1,74 @@
+﻿<Window x:Class="ChronoCross.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChronoCross"
+        mc:Ignorable="d"
+		WindowStartupLocation="CenterScreen"
+		AllowDrop="True" Drop="Window_Drop" PreviewDragOver="Window_PreviewDragOver"
+        Title="Chrono Cross Save Editor" Height="550" Width="800">
+	<Window.DataContext>
+		<local:ViewModel/>
+	</Window.DataContext>
+	<Window.Resources>
+		<BitmapImage UriSource="./resource/open.png" x:Key="open"/>
+		<BitmapImage UriSource="./resource/save.png" x:Key="save"/>
+	</Window.Resources>
+	<DockPanel>
+		<Menu DockPanel.Dock="Top">
+			<MenuItem Header="File">
+				<MenuItem Header="Open..." Click="MenuItemFileOpen_Click"/>
+				<MenuItem Header="Force Open..." Click="MenuItemFileForceOpen_Click"/>
+				<MenuItem Header="Save" Click="MenuItemFileSave_Click"/>
+				<Separator/>
+				<MenuItem Header="Exit" Click="MenuItemFileExit_Click"/>
+			</MenuItem>
+		</Menu>
+		<ToolBar DockPanel.Dock="Top">
+			<Button Height="32" Click="MenuItemFileOpen_Click">
+				<Image Source="{StaticResource open}"/>
+			</Button>
+			<Button Height="32" Click="MenuItemFileSave_Click">
+				<Image Source="{StaticResource save}"/>
+			</Button>
+			<Label Margin="5,0,0,0" Content="File" VerticalAlignment="Center"/>
+			<ComboBox SelectedIndex="{Binding FileIndex}" SelectionChanged="ComboBoxFile_SelectionChanged">
+				<ComboBoxItem Content="File 01"/>
+				<ComboBoxItem Content="File 02"/>
+				<ComboBoxItem Content="File 03"/>
+				<ComboBoxItem Content="File 04"/>
+				<ComboBoxItem Content="File 05"/>
+				<ComboBoxItem Content="File 06"/>
+				<ComboBoxItem Content="File 07"/>
+				<ComboBoxItem Content="File 08"/>
+				<ComboBoxItem Content="File 09"/>
+				<ComboBoxItem Content="File 10"/>
+				<ComboBoxItem Content="File 11"/>
+				<ComboBoxItem Content="File 12"/>
+				<ComboBoxItem Content="File 13"/>
+				<ComboBoxItem Content="File 14"/>
+				<ComboBoxItem Content="File 15"/>
+			</ComboBox>
+		</ToolBar>
+		<TabControl>
+			<TabItem Header="Basic">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition Height="15*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition Width="5"/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<Label Content="Money"/>
+					<TextBox Grid.Column="1" Text="{Binding Money, UpdateSourceTrigger=PropertyChanged}"/>
+				</Grid>
+			</TabItem>
+		</TabControl>
+	</DockPanel>
+</Window>
