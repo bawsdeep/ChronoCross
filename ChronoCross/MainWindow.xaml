@@ -33,23 +33,7 @@
 				<Image Source="{StaticResource save}"/>
 			</Button>
 			<Label Margin="5,0,0,0" Content="File" VerticalAlignment="Center"/>
-			<ComboBox SelectedIndex="{Binding FileIndex}" SelectionChanged="ComboBoxFile_SelectionChanged">
-				<ComboBoxItem Content="File 01"/>
-				<ComboBoxItem Content="File 02"/>
-				<ComboBoxItem Content="File 03"/>
-				<ComboBoxItem Content="File 04"/>
-				<ComboBoxItem Content="File 05"/>
-				<ComboBoxItem Content="File 06"/>
-				<ComboBoxItem Content="File 07"/>
-				<ComboBoxItem Content="File 08"/>
-				<ComboBoxItem Content="File 09"/>
-				<ComboBoxItem Content="File 10"/>
-				<ComboBoxItem Content="File 11"/>
-				<ComboBoxItem Content="File 12"/>
-				<ComboBoxItem Content="File 13"/>
-				<ComboBoxItem Content="File 14"/>
-				<ComboBoxItem Content="File 15"/>
-			</ComboBox>
+			<ComboBox ItemsSource="{Binding FileNameList}" SelectedIndex="{Binding FileIndex}" SelectionChanged="ComboBoxFile_SelectionChanged"/>
 		</ToolBar>
 		<TabControl>
 			<TabItem Header="Basic">

@@ -11,11 +11,10 @@ namespace ChronoCross
 		private static SaveData mThis = new SaveData();
 		private String mFileName = "";
 		private Byte[] mBuffer = new Byte[0];
-		private readonly System.Text.Encoding mEncode = System.Text.Encoding.ASCII;
+		private readonly Encoding mEncode = Encoding.GetEncoding("Shift_JIS");
 		public uint Adventure { get; set; } = 0;
 
-		private SaveData()
-		{ }
+		private SaveData(){}
 
 		public static SaveData Instance()
 		{
@@ -129,6 +128,20 @@ namespace ChronoCross
 		{
 			if (mBuffer == null) return "";
 			address = CalcAddress(address);
+			if (address + size > mBuffer.Length) return "";
+
+			Byte[] tmp = new Byte[size];
+			for (uint i = 0; i < size; i++)
+			{
+				if (mBuffer[address + i] == 0) break;
+				tmp[i] = mBuffer[address + i];
+			}
+			return mEncode.GetString(tmp).Trim('\0');
+		}
+
+		public String ReadTextDirect(uint address, uint size)
+		{
+			if (mBuffer == null) return "";
 			if (address + size > mBuffer.Length) return "";
 
 			Byte[] tmp = new Byte[size];
