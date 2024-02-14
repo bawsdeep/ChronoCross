@@ -1,3 +1,5 @@
+![DL Count](https://img.shields.io/github/downloads/turtle-insect/ChronoCross/total.svg)
+
 # 概要
 Switch クロノ・クロス(Chrono Cross)のセーブデータ編集Tool
 
