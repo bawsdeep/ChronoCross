@@ -1,6 +1,7 @@
 name: Build Solution
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
   pull_request:
@@ -17,10 +18,17 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.0.x' # Change if your project targets a different version
+          dotnet-version: '9.0.x' # change if needed
 
       - name: Restore dependencies
         run: dotnet restore ChronoCross.sln
 
       - name: Build
         run: dotnet build ChronoCross.sln --configuration Release --no-restore
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: |
+            **/bin/Release/
