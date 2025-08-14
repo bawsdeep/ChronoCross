@@ -15,20 +15,28 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
         with:
-          dotnet-version: '9.0.x' # change if needed
+          vs-version: '[16.0,17.0)' # VS2019 for your .sln
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
 
       - name: Restore dependencies
-        run: dotnet restore ChronoCross.sln
+        run: nuget restore "XV2 Xml Serializer.sln"
 
-      - name: Build
-        run: dotnet build ChronoCross.sln --configuration Release --no-restore
+      - name: Build Release
+        run: msbuild "XV2 Xml Serializer.sln" /p:Configuration=Release /p:Platform="Any CPU"
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build-output
           path: |
-            **/bin/Release/
+            XV2 Xml Serializer/bin/Release/**
+            Xv2CoreLib/bin/Release/**
+            EEPK Editor/bin/Release/**
+            LB Mod Installer/bin/Release/**
+            AudioCueEditor/bin/Release/**
+            LB_Common/bin/Release/**
